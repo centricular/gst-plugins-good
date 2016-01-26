@@ -1,7 +1,5 @@
 vmixer_sources = [
   'blend.c',
-  'videoconvert.c',
-  'gstcms.c',
   'videomixer2.c',
 ]
 
