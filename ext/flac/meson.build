@@ -10,4 +10,6 @@ gstflac = library('gstflac',
   c_args : core_args + ['-DGST_USE_UNSTABLE_API'],
   include_directories : core_incs,
   dependencies : [gstbase_dep, gsttag_dep, gstaudio_dep, flac_dep],
+  install : true,
+  install_dir : plugins_install_dir,
 )

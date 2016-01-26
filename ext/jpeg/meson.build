@@ -9,4 +9,6 @@ gstjpeg = library('gstjpeg',
   c_args : core_args,
   include_directories : core_incs,
   dependencies : [gstbase_dep, gstvideo_dep, jpeglib, libm],
+  install : true,
+  install_dir : plugins_install_dir,
 )

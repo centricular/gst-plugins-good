@@ -10,5 +10,7 @@ gstautodetect = library('gstautodetect',
   autodetect_sources,
   c_args : core_args,
   include_directories : core_incs,
-  dependencies : [gst_dep]
+  dependencies : [gst_dep],
+  install : true,
+  install_dir : plugins_install_dir,
 )
