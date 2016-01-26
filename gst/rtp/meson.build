@@ -15,6 +15,8 @@ rtp_sources = [
   'gstrtpgstpay.c',
   'gstrtpilbcdepay.c',
   'gstrtpilbcpay.c',
+  'gstrtpklvdepay.c',
+  'gstrtpklvpay.c',
   'gstrtpmpadepay.c',
   'gstrtpmpapay.c',
   'gstrtpmparobustdepay.c',
@@ -36,6 +38,8 @@ rtp_sources = [
   'gstrtpgsmpay.c',
   'gstrtpamrdepay.c',
   'gstrtpamrpay.c',
+  'gstrtph261depay.c',
+  'gstrtph261pay.c',
   'gstrtph263pdepay.c',
   'gstrtph263ppay.c',
   'gstrtph263depay.c',
@@ -79,6 +83,7 @@ rtp_sources = [
   'gstrtpvrawpay.c',
   'gstrtpstreampay.c',
   'gstrtpstreamdepay.c',
+  'gstrtputils.c',
 ]
 
 rtp_args = [
