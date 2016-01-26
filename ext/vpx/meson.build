@@ -4,6 +4,8 @@ vpx_sources = [
   'gstvp8utils.c',
   'gstvp9dec.c',
   'gstvp9enc.c',
+  'gstvpxdec.c',
+  'gstvpxenc.c',
   'plugin.c',
 ]
 

@@ -1,12 +1,24 @@
-project('gst-plugins-good', 'c', 'cpp', version : '1.4.5',
-  default_options : ['warning_level=1', 'c_std=gnu99'])
+project('gst-plugins-good', 'c', 'cpp',
+  version : '1.7.1.1',
+  meson_version : '>= 0.27.0',
+  default_options : [ 'warning_level=1',
+                      'c_std=gnu99',
+                      'buildtype=debugoptimized' ])
 
-version_str = meson.project_version()
-varr = version_str.split('.')
-version_major = varr[0]
-version_minor = varr[1]
-version_micro = varr[2]
-version_nano = 1
+gst_version = meson.project_version()
+version_arr = gst_version.split('.')
+gst_version_major = version_arr[0]
+gst_version_minor = version_arr[1]
+gst_version_micro = version_arr[2]
+if version_arr.length() == 4
+  gst_version_nano = version_arr[3]
+else
+  gst_version_nano = 0
+endif
+
+glib_req = '>= 2.40.0'
+gst_req = '>= @0@.@1@.0'.format(gst_version_major, gst_version_minor)
+
 api_version = '1.0'
 
 cc = meson.get_compiler('c')
@@ -128,35 +140,35 @@ cdata.set('SIZEOF_SHORT', cc.sizeof('short'))
 cdata.set('SIZEOF_VOIDP', cc.sizeof('void*'))
 
 # Here be fixmes.
-cdata.set('HAVE_CPU_X86_64', 1)
+cdata.set('HAVE_CPU_X86_64', 1) # FIXME
 cdata.set('HAVE_GCC_ASM', 1)
-cdata.set('VERSION', '"@0@"'.format(version_str))
-cdata.set('PACKAGE_VERSION', '"@0@"'.format(version_str))
-cdata.set('GST_LICENSE', '"FIXME"')
-cdata.set('PACKAGE', '"FIXME"')
-cdata.set('GETTEXT_PACKAGE', '"FIXME"')
-cdata.set('GST_PACKAGE_NAME', '"FIXME"')
-cdata.set('GST_PACKAGE_ORIGIN', '"FIXME"')
+cdata.set('VERSION', '"@0@"'.format(gst_version))
+cdata.set('PACKAGE_VERSION', '"@0@"'.format(gst_version))
+cdata.set('GST_LICENSE', '"LGPL"')
+cdata.set('PACKAGE', '"gst-plugins-good"')
+cdata.set('GETTEXT_PACKAGE', '"gst-plugins-good-1.0"')
+cdata.set('GST_PACKAGE_NAME', '"GStreamer Good Plug-ins"')
+cdata.set('GST_PACKAGE_ORIGIN', '"Unknown package origin"') # FIXME: make configurable
 
 # Mandatory GST deps
-gst_dep = dependency('gstreamer-1.0')
-gstvideo_dep = dependency('gstreamer-video-1.0')
-gstpbutils_dep = dependency('gstreamer-pbutils-1.0')
-gsttag_dep = dependency('gstreamer-tag-1.0')
-gstfft_dep = dependency('gstreamer-fft-1.0')
-gstaudio_dep = dependency('gstreamer-audio-1.0')
-gstbase_dep = dependency('gstreamer-base-1.0')
-gstriff_dep = dependency('gstreamer-riff-1.0')
-gstrtp_dep = dependency('gstreamer-rtp-1.0')
-gstnet_dep = dependency('gstreamer-net-1.0')
-gstsdp_dep = dependency('gstreamer-sdp-1.0')
-gstrtsp_dep = dependency('gstreamer-rtsp-1.0')
-gstcheck_dep = dependency('gstreamer-check-1.0')
-gstcontroller_dep = dependency('gstreamer-controller-1.0')
+gst_dep = dependency('gstreamer-1.0', version : gst_req)
+gstvideo_dep = dependency('gstreamer-video-1.0', version : gst_req)
+gstpbutils_dep = dependency('gstreamer-pbutils-1.0', version : gst_req)
+gsttag_dep = dependency('gstreamer-tag-1.0', version : gst_req)
+gstfft_dep = dependency('gstreamer-fft-1.0', version : gst_req)
+gstaudio_dep = dependency('gstreamer-audio-1.0', version : gst_req)
+gstbase_dep = dependency('gstreamer-base-1.0', version : gst_req)
+gstriff_dep = dependency('gstreamer-riff-1.0', version : gst_req)
+gstrtp_dep = dependency('gstreamer-rtp-1.0', version : gst_req)
+gstnet_dep = dependency('gstreamer-net-1.0', version : gst_req)
+gstsdp_dep = dependency('gstreamer-sdp-1.0', version : gst_req)
+gstrtsp_dep = dependency('gstreamer-rtsp-1.0', version : gst_req)
+gstcheck_dep = dependency('gstreamer-check-1.0', version : gst_req)
+gstcontroller_dep = dependency('gstreamer-controller-1.0', version : gst_req)
 
-orc_dep = dependency('orc-0.4')
+orc_dep = dependency('orc-0.4', version : '>= 0.4.17')
 zlib_dep = dependency('zlib')
-gio_dep = dependency('gio-2.0')
+gio_dep = dependency('gio-2.0', version : glib_req)
 
 x_dep = dependency('x11', required : false)
 xfixes_dep = dependency('xfixes', required : false)
@@ -181,7 +193,7 @@ deps = [
   ['libv4l2_dep','libv4l2', '', ''],
   ['xfixes_dep','xfixes', '', ''],
   ['xdamage_dep','xdamage', '', ''],
-  ['cairo_dep','cairo', '>=1.10.0', ''],
+  ['cairo_dep','cairo-gobject', '>=1.10.0', ''],
   ['flac_dep','flac', '>=1.1.4', 'HAVE_FLAC'],
   ['gdkpixbuf_dep','gdk-pixbuf-2.0', '>=2.8.0', ''],
   ['jack_dep','jack', '>=1.9.7', 'HAVE_JACK_1_9_7'],
@@ -196,7 +208,7 @@ deps = [
   ['libsoup_dep','libsoup-2.4', '>=2.40', ''],
   ['speex_dep','speex', '>=1.1.6', ''],
   ['taglib_dep','taglib', '>=1.5', ''],
-  ['vpx_dep','vpx', '>=1.3.0', 'HAVE_VPX'],
+  ['vpx_dep','vpx', '>=1.3.0', 'HAVE_VPX'],  # FIXME: need to check for encoder/decoder symbols
   ['wavpack_dep','wavpack', '>= 4.20', 'HAVE_WAVPACK'],
 ]
 

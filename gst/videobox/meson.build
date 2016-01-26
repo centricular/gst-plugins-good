@@ -9,7 +9,7 @@ vbox_h = configure_file(input : 'gstvideoboxorc-dist.h',
 )
 
 gstvideobox = library('gstvideobox',
-  'gstvideobox.c',
+  'gstvideobox.c', vbox_c,
   c_args : core_args,
   include_directories : core_incs,
   dependencies : [orc_dep, gstbase_dep, gstvideo_dep],
