@@ -3,4 +3,6 @@ gstshapewipe = library('gstshapewipe',
   c_args : core_args,
   include_directories : core_incs,
   dependencies : [gio_dep, gst_dep, gstvideo_dep],
+  install : true,
+  install_dir : plugins_install_dir,
 )

@@ -19,4 +19,6 @@ gstvideomixer = library('gstvideomixer',
   c_args : core_args,
   include_directories : core_incs,
   dependencies : [orc_dep, gstvideo_dep, gstbase_dep, libm],
+  install : true,
+  install_dir : plugins_install_dir,
 )

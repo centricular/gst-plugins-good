@@ -10,4 +10,6 @@ gstrtsp = library('gstrtsp',
   c_args : core_args,
   include_directories : core_incs,
   dependencies : [gstbase_dep, gio_dep, gstrtp_dep, gstrtsp_dep, gstsdp_dep, gstnet_dep],
+  install : true,
+  install_dir : plugins_install_dir,
 )

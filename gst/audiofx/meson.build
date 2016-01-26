@@ -31,5 +31,7 @@ gstaudiofx = library('gstaudiofx',
   audiofx_sources, pano_c,
   c_args : core_args,
   include_directories : core_incs,
-  dependencies : [orc_dep, gstaudio_dep, gstfft_dep]
+  dependencies : [orc_dep, gstaudio_dep, gstfft_dep],
+  install : true,
+  install_dir : plugins_install_dir,
 )
