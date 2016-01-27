@@ -210,7 +210,7 @@ deps = [
   ['libsoup_dep','libsoup-2.4', '>=2.40', ''],
   ['speex_dep','speex', '>=1.1.6', ''],
   ['taglib_dep','taglib', '>=1.5', ''],
-  ['vpx_dep','vpx', '>=1.3.0', 'HAVE_VPX'],  # FIXME: need to check for encoder/decoder symbols
+  ['vpx_dep','vpx', '>=1.3.0', 'HAVE_VPX'],
   ['wavpack_dep','wavpack', '>= 4.20', 'HAVE_WAVPACK'],
 ]
 
