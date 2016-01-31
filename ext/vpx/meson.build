@@ -10,10 +10,10 @@ vpx_sources = [
 ]
 
 vpx_features = [
-  [ 'vpx/vp8cx.h', 'vpx_codec_vp8_cx_algo', '-DHAVE_VP8_ENCODER' ],
-  [ 'vpx/vp8dx.h', 'vpx_codec_vp8_dx_algo', '-DHAVE_VP8_DECODER' ],
-  [ 'vpx/vp8cx.h', 'vpx_codec_vp9_cx_algo', '-DHAVE_VP9_ENCODER' ],
-  [ 'vpx/vp8dx.h', 'vpx_codec_vp9_dx_algo', '-DHAVE_VP9_DECODER' ],
+  [ 'vpx/vp8cx.h', 'vpx_codec_vp8_cx_algo', '-DHAVE_VP8_ENCODER', 'VP8 encoder' ],
+  [ 'vpx/vp8dx.h', 'vpx_codec_vp8_dx_algo', '-DHAVE_VP8_DECODER', 'VP8 decoder' ],
+  [ 'vpx/vp8cx.h', 'vpx_codec_vp9_cx_algo', '-DHAVE_VP9_ENCODER', 'VP9 encoder' ],
+  [ 'vpx/vp8dx.h', 'vpx_codec_vp9_dx_algo', '-DHAVE_VP9_DECODER', 'VP9 decoder' ],
 ]
 
 vpx_args = [ ]
@@ -22,10 +22,17 @@ foreach f : vpx_features
   header = f.get(0)
   codec_iface = f.get(1)
   extra_define = f.get(2)
-  link_code = '#include <@0@>\nint main (int a, char ** g) { const vpx_codec_iface_t *c = &@1@; return c != 0; }'.format(header,codec_iface)
+  link_code = '''#include <@0@>
+                 int main (int a, char ** g) {
+                   const vpx_codec_iface_t *c = &@1@;
+                   return c != 0;
+                 }'''.format(header,codec_iface)
   # FIXME: should take dependencies : vpx_dep argument
   if cc.links(link_code, args : '-lvpx')
     vpx_args += extra_define
+    message('libvpx provides @0@ interface (@1@)'.format(f.get(3),f.get(1)))
+  else
+    message('libvpx does not provide @0@ interface (@1@)'.format(f.get(3),f.get(1)))
   endif
 endforeach
 
