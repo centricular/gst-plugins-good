@@ -1,7 +1,7 @@
 libparser = library('libparser',
   'elements/parser.c',
-  c_args : core_args + ['-DGST_USE_UNSTABLE_API'],
-  include_directories : core_incs,
+  c_args : gst_plugins_good_args + ['-DGST_USE_UNSTABLE_API'],
+  include_directories : gst_plugins_good_incs,
   dependencies : [gstcheck_dep],
 )
 
@@ -9,8 +9,8 @@ libparser = library('libparser',
 
 test('generic/states', executable('states',
   'generic/states.c',
-  c_args : core_args,
-  include_directories : core_incs,
+  c_args : gst_plugins_good_args,
+  include_directories : gst_plugins_good_incs,
   dependencies : [gstcheck_dep],)
 )
 

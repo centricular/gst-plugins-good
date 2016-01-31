@@ -808,6 +808,7 @@ AG_GST_CHECK_FEATURE(TAGLIB, [taglib tagging library], taglib, [
 ])
 
 dnl *** vpx ***
+dnl FIXME: require 1.3.0 unconditionally
 translit(dnm, m, l) AM_CONDITIONAL(USE_VPX, vpx)
 AG_GST_CHECK_FEATURE(VPX, [VPX decoder], vpx, [
   PKG_CHECK_MODULES(VPX, vpx >= 1.1.0, [HAVE_VPX="yes"], [HAVE_VPX="no"])

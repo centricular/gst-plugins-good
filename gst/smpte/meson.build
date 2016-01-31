@@ -9,8 +9,8 @@ smpte_sources = [
 
 gstsmpte = library('gstsmpte',
   smpte_sources,
-  c_args : core_args,
-  include_directories : core_incs,
+  c_args : gst_plugins_good_args,
+  include_directories : gst_plugins_good_incs,
   dependencies : [gstvideo_dep, gst_dep, libm],
   install : true,
   install_dir : plugins_install_dir,
