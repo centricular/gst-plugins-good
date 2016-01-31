@@ -17,8 +17,8 @@ mp4_sources = [
 
 gstisomp4 = library('gstisomp4',
   mp4_sources,
-  c_args : core_args,
-  include_directories : core_incs,
+  c_args : gst_plugins_good_args,
+  include_directories : gst_plugins_good_incs,
   dependencies : [gst_dep, gstriff_dep, gstaudio_dep, gstvideo_dep, gstrtp_dep, gsttag_dep, gstpbutils_dep],
   install : true,
   install_dir : plugins_install_dir,
