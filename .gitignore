@@ -63,3 +63,6 @@ Build
 /test-driver
 *.log
 *.trs
+
+/build
+/subprojects
