@@ -99,7 +99,6 @@ check_functions = [
 # check token HAVE_LIBDV
 # check token HAVE_LIBV4L2
   ['HAVE_MMAP', 'mmap', '#include<sys/mman.h>'],
-# check token HAVE_ORC
 # check token HAVE_OSS
 # check token HAVE_OSS4
 # check token HAVE_OSS_INCLUDE_IN_MACHINE
@@ -192,7 +191,13 @@ else
   gstvideo_dep = dependency('gstreamer-video-1.0', version : gst_req)
 endif
 
-orc_dep = dependency('orc-0.4', version : '>= 0.4.17')
+orc_dep = dependency('orc-0.4', version : '>= 0.4.17', required : false)
+if orc_dep.found()
+  cdata.set('HAVE_ORC', 1)
+else
+  cdata.set('DISABLE_ORC', 1)
+endif
+
 zlib_dep = dependency('zlib')
 gio_dep = dependency('gio-2.0', version : glib_req)
 
