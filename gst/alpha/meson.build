@@ -1,7 +1,7 @@
 gstalpha = library('gstalpha', 'gstalpha.c',
   c_args : gst_plugins_good_args,
   include_directories : gst_plugins_good_incs,
-  dependencies : [gstvideo_dep, gst_dep]
+  dependencies : [gstvideo_dep, gst_dep, libm]
 )
 
 gstalphacolor = library('gstalphacolor', 'gstalphacolor.c',

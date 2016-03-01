@@ -17,5 +17,5 @@ test('generic/states', executable('states',
 # FIXME, set up registry and envvars
 test('alphacolor',
   executable('alphacolor', 'elements/alphacolor.c',
-    dependencies : [gstcheck_dep])
+    dependencies : [gstcheck_dep, gstvideo_dep])
 )
