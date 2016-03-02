@@ -11,7 +11,6 @@ matroska_sources = [
   'lzo.c',
 ]
 
-
 gstmatroska = library('gstmatroska',
   matroska_sources,
   c_args : gst_plugins_good_args,

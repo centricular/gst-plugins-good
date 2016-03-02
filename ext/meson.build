@@ -2,25 +2,16 @@
 #  AALIB_DIR = aalib
 #  endif
 
-if cairo_dep.found()
-  subdir('cairo')
-endif
+subdir('cairo')
 
-if flac_dep.found()
-  subdir('flac')
-endif
-
-if gdkpixbuf_dep.found()
-   subdir('gdk_pixbuf')
-endif
+subdir('flac')
+subdir('gdk_pixbuf')
 
 #  if USE_JACK
 #  JACK_DIR=jack
 #  endif
 #
-if jpeglib.found()
-  subdir('jpeg')
-endif
+subdir('jpeg')
 
 #
 #  if USE_LIBCACA
@@ -31,38 +22,27 @@ endif
 #  LIBDV_DIR = dv
 #  endif
 
-if libpng_dep.found()
-  subdir('libpng')
-endif
+subdir('libpng')
 
 #  if USE_DV1394
 #  DV1394_DIR = raw1394
 #  endif
 
-if libpulse_dep.found()
-  subdir('pulse')
-endif
+subdir('pulse')
 
 #
 #  if USE_SHOUT2
 #  SHOUT2_DIR = shout2
 #  endif
 
-if libsoup_dep.found()
-  subdir('soup')
-endif
-
-if speex_dep.found()
-  subdir('speex')
-endif
+subdir('soup')
+subdir('speex')
 
 #  if USE_TAGLIB
 #  TAGLIB_DIR = taglib
 #  endif
 
-if vpx_dep.found()
-  subdir('vpx')
-endif
+subdir('vpx')
 
 #  if USE_WAVPACK
 #  WAVPACK_DIR=wavpack

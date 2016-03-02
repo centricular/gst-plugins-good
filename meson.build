@@ -192,55 +192,36 @@ else
   gstvideo_dep = dependency('gstreamer-video-1.0', version : gst_req)
 endif
 
+libm = find_library('m', required : false)
+zlib_dep = dependency('zlib')
+bz2lib = find_library('bz2')
 orc_dep = dependency('orc-0.4', version : '>= 0.4.17', required : false)
+gio_dep = dependency('gio-2.0', version : glib_req)
+
+cdata.set('HAVE_ZLIB', 1)
+cdata.set('HAVE_BZ2', 1)
 if orc_dep.found()
   cdata.set('HAVE_ORC', 1)
 else
   cdata.set('DISABLE_ORC', 1)
 endif
 
-zlib_dep = dependency('zlib')
-gio_dep = dependency('gio-2.0', version : glib_req)
-
-x_dep = dependency('x11', required : false)
-xfixes_dep = dependency('xfixes', required : false)
-xdamage_dep = dependency('xdamage', required : false)
-
-libm = find_library('m', required : false)
-bz2lib = find_library('bz2', required : false)
-jpeglib = find_library('jpeg', required : false)
-
-if bz2lib.found()
-  cdata.set('HAVE_BZ2', 1)
-endif
-if jpeglib.found()
-  cdata.set('HAVE_JPEG', 1)
-endif
-
 # Check all of the things.
+# TODO: None of these are actually used yet because
+# the build files haven't been written
 deps = [
   ['gtk_dep','gtk+-3.0', '', ''],
   ['gtkx_dep','gtk+-x11-3.0', '', ''],
   ['gudev_dep','gudev-1.0', '>=147', ''],
   ['libv4l2_dep','libv4l2', '', ''],
-  ['xfixes_dep','xfixes', '', ''],
-  ['xdamage_dep','xdamage', '', ''],
-  ['cairo_dep','cairo-gobject', '>=1.10.0', ''],
-  ['flac_dep','flac', '>=1.1.4', 'HAVE_FLAC'],
-  ['gdkpixbuf_dep','gdk-pixbuf-2.0', '>=2.8.0', ''],
   ['jack_dep','jack', '>=1.9.7', 'HAVE_JACK_1_9_7'],
   ['caca_dep','caca', '', ''],
   ['libdv_dep','libdv', '>=0.100', ''],
-  ['libpng_dep','libpng', '>=1.2', ''],
-  ['libpulse_dep','libpulse', '>=2.0', 'HAVE_PULSE'],
   ['libraw1394_dep','libraw1394', '>=2.0.0', ''],
   ['libiec61883_dep','libiec61883', '>=1.0.0', ''],
   ['libraw1394_dep','libraw1394', '>=1.1.0', ''],
   ['shout_dep','shout', '>=2.0', ''],
-  ['libsoup_dep','libsoup-2.4', '>=2.40', ''],
-  ['speex_dep','speex', '>=1.1.6', ''],
   ['taglib_dep','taglib', '>=1.5', ''],
-  ['vpx_dep','vpx', '>=1.3.0', 'HAVE_VPX'],
   ['wavpack_dep','wavpack', '>= 4.20', 'HAVE_WAVPACK'],
 ]
 
@@ -259,13 +240,6 @@ foreach d : deps
     cdata.set(confhname, 1)
   endif
 endforeach
-
-if vpx_dep.found()
-  cdata.set('HAVE_VP8_ENCODER', 1)
-  cdata.set('HAVE_VP8_DECODER', 1)
-  cdata.set('HAVE_VP9_ENCODER', 1)
-  cdata.set('HAVE_VP9_DECODER', 1)
-endif
 
 if cc.has_header('valgrind.h')
   cdata.set('HAVE_VALGRIND', 1)
