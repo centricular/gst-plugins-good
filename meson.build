@@ -52,11 +52,7 @@ foreach h : check_headers
 endforeach
 
 check_functions = [
-# check token HAVE_AALIB
   ['HAVE_ASINH', 'asinh', '#include<math.h>'],
-# check token HAVE_BZ2
-# check token HAVE_CFLOCALECOPYCURRENT
-# check token HAVE_CFPREFERENCESCOPYAPPVALUE
   ['HAVE_CLOCK_GETTIME', 'clock_gettime', '#include<time.h>'],
   ['HAVE_COSH', 'cosh', '#include<math.h>'],
 # check token HAVE_CPU_ALPHA
@@ -75,29 +71,15 @@ check_functions = [
 # check token HAVE_CPU_X86_64
   ['HAVE_DCGETTEXT', 'dcgettext', '#include<libintl.h>'],
 # check token HAVE_DIRECTSOUND
-# check token HAVE_DOWHILE_MACROS
-# check token HAVE_DV1394
 # check token HAVE_EXPERIMENTAL
 # check token HAVE_EXTERNAL
-# check token HAVE_FIONREAD_IN_SYS_FILIO
-# check token HAVE_FIONREAD_IN_SYS_IOCTL
-# check token HAVE_FLAC
 # check token HAVE_FPCLASS
 # check token HAVE_GCC_ASM
-# check token HAVE_GDK_PIXBUF
   ['HAVE_GETPAGESIZE', 'getpagesize', '#include<unistd.h>'],
 # check token HAVE_GETTEXT
 # check token HAVE_GST_V4L2
-# check token HAVE_GUDEV
-# check token HAVE_ICONV
 # check token HAVE_IOS
-# check token HAVE_IP_MREQN
   ['HAVE_ISINF', 'isinf', '#include<math.h>'],
-# check token HAVE_JACK
-# check token HAVE_JACK_0_120_1
-# check token HAVE_JACK_1_9_7
-# check token HAVE_LIBCACA
-# check token HAVE_LIBDV
 # check token HAVE_LIBV4L2
   ['HAVE_MMAP', 'mmap', '#include<sys/mman.h>'],
 # check token HAVE_OSS
@@ -107,26 +89,10 @@ check_functions = [
 # check token HAVE_OSS_INCLUDE_IN_SYS
 # check token HAVE_OSX_AUDIO
 # check token HAVE_OSX_VIDEO
-# check token HAVE_PULSE
 # check token HAVE_RDTSC
-# check token HAVE_RINT
-# check token HAVE_SHOUT2
   ['HAVE_SINH', 'sinh', '#include<math.h>'],
-# check token HAVE_SOUP
-# check token HAVE_SPEEX
 # check token HAVE_SUNAUDIO
-# check token HAVE_TAGLIB
-# check token HAVE_VALGRIND
-# check token HAVE_VP8_DECODER
-# check token HAVE_VP8_ENCODER
-# check token HAVE_VP9_DECODER
-# check token HAVE_VP9_ENCODER
-# check token HAVE_VPX
 # check token HAVE_WAVEFORM
-# check token HAVE_WAVPACK
-# check token HAVE_X
-# check token HAVE_XSHM
-# check token HAVE_ZLIB
 ]
 
 foreach f : check_functions
