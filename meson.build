@@ -158,14 +158,16 @@ else
   gstvideo_dep = dependency('gstreamer-video-1.0', version : gst_req)
 endif
 
-libm = find_library('m', required : false)
+libm = cc.find_library('m', required : false)
 zlib_dep = dependency('zlib')
-bz2lib = find_library('bz2')
+bz2lib = cc.find_library('bz2', required : false)
 orc_dep = dependency('orc-0.4', version : '>= 0.4.17', required : false)
 gio_dep = dependency('gio-2.0', version : glib_req)
 
 cdata.set('HAVE_ZLIB', 1)
-cdata.set('HAVE_BZ2', 1)
+if bz2lib.found()
+  cdata.set('HAVE_BZ2', 1)
+endif
 if orc_dep.found()
   cdata.set('HAVE_ORC', 1)
 else

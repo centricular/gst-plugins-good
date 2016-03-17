@@ -4,7 +4,7 @@ jpeg_sources = [
   'gstjpegdec.c',
 ]
 
-jpeglib = find_library('jpeg', required : false)
+jpeglib = cc.find_library('jpeg', required : false)
 
 if jpeglib.found()
   gstjpeg = library('gstjpeg',
