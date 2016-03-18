@@ -108,8 +108,9 @@ cdata.set('SIZEOF_SHORT', cc.sizeof('short'))
 cdata.set('SIZEOF_VOIDP', cc.sizeof('void*'))
 
 # Here be fixmes.
-cdata.set('HAVE_CPU_X86_64', 1) # FIXME
-cdata.set('HAVE_GCC_ASM', 1)
+# FIXME: check if this is correct
+cdata.set('HAVE_CPU_X86_64', host_machine.cpu() == 'amd64')
+cdata.set('HAVE_GCC_ASM', cc.get_id() != 'msvc')
 cdata.set('VERSION', '"@0@"'.format(gst_version))
 cdata.set('PACKAGE_VERSION', '"@0@"'.format(gst_version))
 cdata.set('GST_LICENSE', '"LGPL"')
