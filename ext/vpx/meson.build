@@ -19,6 +19,11 @@ vpx_features = [
 vpx_dep = dependency('vpx', version : '>=1.3.0', required : false)
 
 if vpx_dep.found()
+  if cc.get_id() == 'msvc'
+    vpx_lib = 'vpx.lib'
+  else
+    vpx_lib = '-lvpx'
+  endif
   vpx_args = []
   foreach f : vpx_features
     header = f.get(0)
@@ -30,7 +35,7 @@ if vpx_dep.found()
                      return c != 0;
                    }'''.format(header,codec_iface)
     # FIXME: should take dependencies : vpx_dep argument
-    if cc.links(link_code, args : '-lvpx')
+    if cc.links(link_code, args : [vpx_lib])
       vpx_args += extra_define
       message('libvpx provides @0@ interface (@1@)'.format(f.get(3),f.get(1)))
     else
