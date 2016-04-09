@@ -8,7 +8,7 @@ avi_sources = [
 gstavi = library('gstavi',
   avi_sources,
   c_args : gst_plugins_good_args,
-  include_directories : gst_plugins_good_incs,
+  include_directories : [configinc, libsinc],
   dependencies : [gst_dep, gstriff_dep, gstaudio_dep, gstvideo_dep, gsttag_dep],
   install : true,
   install_dir : plugins_install_dir,

@@ -13,7 +13,7 @@ audioparsers_src = [
 gstaudioparsers = library('gstaudioparsers',
   audioparsers_src,
   c_args : gst_plugins_good_args,
-  include_directories : gst_plugins_good_incs,
+  include_directories : [configinc],
   dependencies : [gst_dep, gstbase_dep, gstpbutils_dep,
                   gstaudio_dep, gsttag_dep],
   install : true,

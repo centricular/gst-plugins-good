@@ -13,8 +13,8 @@ multifile_sources = [
 gstmultifile = library('gstmultifile',
   multifile_sources,
   c_args : gst_plugins_good_args,
-  include_directories : gst_plugins_good_incs,
-  dependencies : [ gstvideo_dep, gstbase_dep, gio_dep ],
+  include_directories : [configinc, libsinc],
+  dependencies : [gstvideo_dep, gstbase_dep, gio_dep],
   install : true,
   install_dir : plugins_install_dir,
 )
@@ -29,8 +29,8 @@ test_splitmuxpartreader_sources = [
 
 executable('test-splitmuxpartreader',
   test_splitmuxpartreader_sources,
-  include_directories : gst_plugins_good_incs,
   c_args : gst_plugins_good_args,
-  dependencies : [ gsttag_dep, gstbase_dep ],
+  include_directories : [configinc, libsinc],
+  dependencies : [gsttag_dep, gstbase_dep],
   install : false,
 )

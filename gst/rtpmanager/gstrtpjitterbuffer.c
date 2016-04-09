@@ -109,7 +109,7 @@
 #include "rtpjitterbuffer.h"
 #include "rtpstats.h"
 
-#include <gst/glib-compat-private.h>
+#include "gst/glib-compat-private.h"
 
 GST_DEBUG_CATEGORY (rtpjitterbuffer_debug);
 #define GST_CAT_DEFAULT (rtpjitterbuffer_debug)

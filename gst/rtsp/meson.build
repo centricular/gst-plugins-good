@@ -8,7 +8,7 @@ rtsp_sources = [
 gstrtsp = library('gstrtsp',
   rtsp_sources,
   c_args : gst_plugins_good_args,
-  include_directories : gst_plugins_good_incs,
+  include_directories : [configinc, libsinc],
   dependencies : [gstbase_dep, gio_dep, gstrtp_dep, gstrtsp_dep, gstsdp_dep, gstnet_dep],
   install : true,
   install_dir : plugins_install_dir,
