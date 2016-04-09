@@ -101,7 +101,7 @@ rtp_args = [
 gstrtp = library('gstrtp',
   rtp_sources,
   c_args : gst_plugins_good_args + rtp_args,
-  include_directories : gst_plugins_good_incs,
+  include_directories : [configinc],
   dependencies : [gstbase_dep, gstaudio_dep, gstvideo_dep, gsttag_dep,
                   gstrtp_dep, gstpbutils_dep, libm],
   install : true,

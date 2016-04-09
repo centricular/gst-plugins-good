@@ -41,7 +41,7 @@
 #include "config.h"
 #endif
 
-#include <gst/glib-compat-private.h>
+#include "gst/glib-compat-private.h"
 
 #include "gstimagefreeze.h"
 

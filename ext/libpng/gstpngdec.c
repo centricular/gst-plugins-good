@@ -36,7 +36,7 @@
 #include <gst/video/video.h>
 #include <gst/video/gstvideometa.h>
 #include <gst/video/gstvideopool.h>
-#include <gst/gst-i18n-plugin.h>
+#include "gst/gst-i18n-plugin.h"
 
 GST_DEBUG_CATEGORY_STATIC (pngdec_debug);
 #define GST_CAT_DEFAULT pngdec_debug

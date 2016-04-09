@@ -32,8 +32,8 @@ goom2k1_sources = [
 gstgoom2k1 = library('gstgoom2k1',
   goom2k1_sources,
   c_args : gst_plugins_good_args + goom2k1_args + filter_args,
-  include_directories : gst_plugins_good_incs,
-  dependencies : [ gstpbutils_dep, gstbase_dep, libm ],
+  include_directories : [configinc],
+  dependencies : [gstpbutils_dep, gstbase_dep, libm],
   install : true,
   install_dir : plugins_install_dir,
 )

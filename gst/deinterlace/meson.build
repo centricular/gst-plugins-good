@@ -23,12 +23,10 @@ tvtime_h = configure_file(input : 'tvtime-dist.h',
   configuration : configuration_data()
 )
 
-
-
 gstdeinterlace = library('gstdeinterlace',
   interlace_sources, tvtime_c,
   c_args : gst_plugins_good_args,
-  include_directories : gst_plugins_good_incs,
+  include_directories : [configinc],
   dependencies : [orc_dep, gstbase_dep, gstvideo_dep],
   install : true,
   install_dir : plugins_install_dir,

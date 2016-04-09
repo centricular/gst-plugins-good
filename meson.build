@@ -120,50 +120,43 @@ cdata.set('GST_PACKAGE_NAME', '"GStreamer Good Plug-ins"')
 cdata.set('GST_PACKAGE_ORIGIN', '"Unknown package origin"') # FIXME: make configurable
 
 # Mandatory GST deps
-gst_dep = dependency('gstreamer-1.0', version : gst_req, required : false)
-if not gst_dep.found()
-  gst_proj = subproject('gstreamer')
-  gst_dep = gst_proj.get_variable('gst_dep')
-  gstbase_dep = gst_proj.get_variable('gst_base_dep')
-  gstnet_dep = gst_proj.get_variable('gst_net_dep')
-  gstcheck_dep = gst_proj.get_variable('gst_check_dep')
-  gstcontroller_dep = gst_proj.get_variable('gst_controller_dep')
-else
-  gstbase_dep = dependency('gstreamer-base-1.0', version : gst_req)
-  gstnet_dep = dependency('gstreamer-net-1.0', version : gst_req)
-  gstcheck_dep = dependency('gstreamer-check-1.0', version : gst_req)
-  gstcontroller_dep = dependency('gstreamer-controller-1.0', version : gst_req)
-endif
+gst_dep = dependency('gstreamer-1.0', version : gst_req,
+  fallback : ['gstreamer', 'gst_dep'])
+gstbase_dep = dependency('gstreamer-base-1.0', version : gst_req,
+  fallback : ['gstreamer', 'gst_base_dep'])
+gstnet_dep = dependency('gstreamer-net-1.0', version : gst_req,
+  fallback : ['gstreamer', 'gst_net_dep'])
+gstcheck_dep = dependency('gstreamer-check-1.0', version : gst_req,
+  fallback : ['gstreamer', 'gst_check_dep'])
+gstcontroller_dep = dependency('gstreamer-controller-1.0', version : gst_req,
+  fallback : ['gstreamer', 'gst_controller_dep'])
 
 gstpbutils_dep = dependency('gstreamer-pbutils-1.0', version : gst_req,
-  required : false)
-if not gstpbutils_dep.found()
-  gstpb_proj = subproject('gst-plugins-base')
-  gstpbutils_dep = gstpb_proj.get_variable('pbutils_dep')
-  gstaudio_dep = gstpb_proj.get_variable('audio_dep')
-  gstfft_dep = gstpb_proj.get_variable('fft_dep')
-  gstriff_dep = gstpb_proj.get_variable('riff_dep')
-  gstrtp_dep = gstpb_proj.get_variable('rtp_dep')
-  gstrtsp_dep = gstpb_proj.get_variable('rtsp_dep')
-  gstsdp_dep = gstpb_proj.get_variable('sdp_dep')
-  gsttag_dep = gstpb_proj.get_variable('tag_dep')
-  gstvideo_dep = gstpb_proj.get_variable('video_dep')
-else
-  gstaudio_dep = dependency('gstreamer-audio-1.0', version : gst_req)
-  gstfft_dep = dependency('gstreamer-fft-1.0', version : gst_req)
-  gstriff_dep = dependency('gstreamer-riff-1.0', version : gst_req)
-  gstrtp_dep = dependency('gstreamer-rtp-1.0', version : gst_req)
-  gstrtsp_dep = dependency('gstreamer-rtsp-1.0', version : gst_req)
-  gstsdp_dep = dependency('gstreamer-sdp-1.0', version : gst_req)
-  gsttag_dep = dependency('gstreamer-tag-1.0', version : gst_req)
-  gstvideo_dep = dependency('gstreamer-video-1.0', version : gst_req)
-endif
+    fallback : ['gst-plugins-base', 'pbutils_dep'])
+gstaudio_dep = dependency('gstreamer-audio-1.0', version : gst_req,
+    fallback : ['gst-plugins-base', 'audio_dep'])
+gstfft_dep = dependency('gstreamer-fft-1.0', version : gst_req,
+    fallback : ['gst-plugins-base', 'fft_dep'])
+gstriff_dep = dependency('gstreamer-riff-1.0', version : gst_req,
+    fallback : ['gst-plugins-base', 'riff_dep'])
+gstrtp_dep = dependency('gstreamer-rtp-1.0', version : gst_req,
+    fallback : ['gst-plugins-base', 'rtp_dep'])
+gstrtsp_dep = dependency('gstreamer-rtsp-1.0', version : gst_req,
+    fallback : ['gst-plugins-base', 'rtsp_dep'])
+gstsdp_dep = dependency('gstreamer-sdp-1.0', version : gst_req,
+    fallback : ['gst-plugins-base', 'sdp_dep'])
+gsttag_dep = dependency('gstreamer-tag-1.0', version : gst_req,
+    fallback : ['gst-plugins-base', 'tag_dep'])
+gstvideo_dep = dependency('gstreamer-video-1.0', version : gst_req,
+    fallback : ['gst-plugins-base', 'video_dep'])
 
 libm = cc.find_library('m', required : false)
 zlib_dep = dependency('zlib')
 bz2lib = cc.find_library('bz2', required : false)
 orc_dep = dependency('orc-0.4', version : '>= 0.4.17', required : false)
 gio_dep = dependency('gio-2.0', version : glib_req)
+glib_deps = [dependency('glib-2.0', version : glib_req),
+	     dependency('gobject-2.0', version : glib_req)]
 
 cdata.set('HAVE_ZLIB', 1)
 if bz2lib.found()
@@ -219,7 +212,8 @@ configure_file(input : 'config.h.meson',
   configuration : cdata)
 
 gst_plugins_good_args = ['-DHAVE_CONFIG_H']
-gst_plugins_good_incs = include_directories('.', 'gst-libs')
+configinc = include_directories('.')
+libsinc = include_directories('gst-libs')
 
 subdir('gst')
 subdir('sys')
