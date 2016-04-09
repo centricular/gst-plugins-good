@@ -26,6 +26,7 @@ plugins_install_dir = '@0@/gstreamer-1.0'.format(get_option('libdir'))
 cc = meson.get_compiler('c')
 
 cdata = configuration_data()
+
 check_headers = [
   ['HAVE_DLFCN_H', 'dlfcn.h'],
   ['HAVE_FCNTL_H', 'fcntl.h'],
@@ -133,6 +134,8 @@ gstcontroller_dep = dependency('gstreamer-controller-1.0', version : gst_req,
 
 gstpbutils_dep = dependency('gstreamer-pbutils-1.0', version : gst_req,
     fallback : ['gst-plugins-base', 'pbutils_dep'])
+gstallocators_dep = dependency('gstreamer-allocators-1.0', version : gst_req,
+    fallback : ['gst-plugins-base', 'allocators_dep'])
 gstaudio_dep = dependency('gstreamer-audio-1.0', version : gst_req,
     fallback : ['gst-plugins-base', 'audio_dep'])
 gstfft_dep = dependency('gstreamer-fft-1.0', version : gst_req,
@@ -174,8 +177,6 @@ endif
 deps = [
   ['gtk_dep','gtk+-3.0', '', ''],
   ['gtkx_dep','gtk+-x11-3.0', '', ''],
-  ['gudev_dep','gudev-1.0', '>=147', ''],
-  ['libv4l2_dep','libv4l2', '', ''],
   ['jack_dep','jack', '>=1.9.7', 'HAVE_JACK_1_9_7'],
   ['caca_dep','caca', '', ''],
   ['libdv_dep','libdv', '>=0.100', ''],
@@ -207,10 +208,6 @@ if cc.has_header('valgrind.h')
   cdata.set('HAVE_VALGRIND', 1)
 endif
 
-configure_file(input : 'config.h.meson',
-  output : 'config.h',
-  configuration : cdata)
-
 gst_plugins_good_args = ['-DHAVE_CONFIG_H']
 configinc = include_directories('.')
 libsinc = include_directories('gst-libs')
@@ -219,3 +216,7 @@ subdir('gst')
 subdir('sys')
 subdir('ext')
 subdir('tests')
+
+configure_file(input : 'config.h.meson',
+  output : 'config.h',
+  configuration : cdata)

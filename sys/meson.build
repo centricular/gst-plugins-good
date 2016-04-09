@@ -1,3 +1,4 @@
+subdir('v4l2')
 subdir('ximage')
 
 # FIXME: Implement these
@@ -7,5 +8,4 @@ subdir('ximage')
 #subdir('osxaudio')
 #subdir('osxvideo')
 #subdir('sunaudio')
-#subdir('v4l2')
 #subdir('waveform')
