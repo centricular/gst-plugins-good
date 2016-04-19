@@ -2,7 +2,7 @@
 subdir('cairo')
 subdir('flac')
 subdir('gdk_pixbuf')
-# subdir('jack')
+subdir('jack')
 subdir('jpeg')
 # subdir('libcaca')
 subdir('dv')
