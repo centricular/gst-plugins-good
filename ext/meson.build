@@ -1,40 +1,15 @@
-#  if USE_AALIB
-#  AALIB_DIR = aalib
-#  endif
-
+# subdir('aalib')
 subdir('cairo')
-
 subdir('flac')
 subdir('gdk_pixbuf')
-
-#  if USE_JACK
-#  JACK_DIR=jack
-#  endif
-#
+# subdir('jack')
 subdir('jpeg')
-
-#
-#  if USE_LIBCACA
-#  LIBCACA_DIR = libcaca
-#  endif
-#
-#  if USE_LIBDV
-#  LIBDV_DIR = dv
-#  endif
-
+# subdir('libcaca')
+# subdir('libdv')
 subdir('libpng')
-
-#  if USE_DV1394
-#  DV1394_DIR = raw1394
-#  endif
-
+# subdir('raw1394')
 subdir('pulse')
-
-#
-#  if USE_SHOUT2
-#  SHOUT2_DIR = shout2
-#  endif
-
+subdir('shout2')
 subdir('soup')
 subdir('speex')
 subdir('taglib')
