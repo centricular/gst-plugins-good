@@ -1,8 +1,8 @@
 subdir('v4l2')
 subdir('ximage')
+subdir('directsound')
 
 # FIXME: Implement these
-#subdir('directsound')
 #subdir('oss')
 #subdir('oss4')
 #subdir('osxaudio')
