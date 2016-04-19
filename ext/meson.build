@@ -37,13 +37,6 @@ subdir('pulse')
 
 subdir('soup')
 subdir('speex')
-
-#  if USE_TAGLIB
-#  TAGLIB_DIR = taglib
-#  endif
-
+subdir('taglib')
 subdir('vpx')
-
-#  if USE_WAVPACK
-#  WAVPACK_DIR=wavpack
-#  endif
+subdir('wavpack')
