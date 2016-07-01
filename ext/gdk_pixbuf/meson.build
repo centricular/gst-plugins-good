@@ -11,6 +11,7 @@ if gdkpixbuf_dep.found()
   gstgdkpixbuf = library('gstgdkpixbuf',
     pixbuf_sources,
     c_args : gst_plugins_good_args,
+    link_args : noseh_link_args,
     include_directories : [configinc],
     dependencies : [gstbase_dep, gstvideo_dep, gstcontroller_dep, gdkpixbuf_dep],
     install : true,

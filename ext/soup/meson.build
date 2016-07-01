@@ -16,6 +16,7 @@ if libsoup_dep.found()
   gstsouphttpsrc = library('gstsouphttpsrc',
     soup_sources,
     c_args : gst_plugins_good_args + soup_args,
+    link_args : noseh_link_args,
     include_directories : [configinc, libsinc],
     dependencies : [gst_dep, gstbase_dep, gsttag_dep, libsoup_dep],
     install : true,

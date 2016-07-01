@@ -10,6 +10,7 @@ if speex_dep.found()
   gstspeex = library('gstspeex',
     speex_sources,
     c_args : gst_plugins_good_args + ['-DGST_USE_UNSTABLE_API'],
+    link_args : noseh_link_args,
     include_directories : [configinc],
     dependencies : [gstbase_dep, gsttag_dep, gstaudio_dep, speex_dep, libm],
     install : true,

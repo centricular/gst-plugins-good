@@ -18,6 +18,7 @@ mp4_sources = [
 gstisomp4 = library('gstisomp4',
   mp4_sources,
   c_args : gst_plugins_good_args,
+  link_args : noseh_link_args,
   include_directories : [configinc, libsinc],
   dependencies : [gst_dep, gstriff_dep, gstaudio_dep, gstvideo_dep,
                   gstrtp_dep, gsttag_dep, gstpbutils_dep, zlib_dep],
