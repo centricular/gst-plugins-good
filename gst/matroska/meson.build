@@ -14,6 +14,7 @@ matroska_sources = [
 gstmatroska = library('gstmatroska',
   matroska_sources,
   c_args : gst_plugins_good_args,
+  link_args : noseh_link_args,
   include_directories : [configinc],
   dependencies : [gstpbutils_dep, gstaudio_dep, gstriff_dep,
                   gstvideo_dep, gsttag_dep, gstbase_dep,
