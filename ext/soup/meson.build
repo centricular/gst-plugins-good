@@ -6,11 +6,11 @@ soup_sources = [
 ]
 
 soup_args = [
-  '-DSOUP_VERSION_MIN_REQUIRED=SOUP_VERSION_2_26',
-  '-DSOUP_VERSION_MAX_ALLOWED=SOUP_DEPRECATED_IN_2_26',
+  '-DSOUP_VERSION_MIN_REQUIRED=SOUP_VERSION_2_48',
+  '-DSOUP_VERSION_MAX_ALLOWED=SOUP_DEPRECATED_IN_2_48',
 ]
 
-libsoup_dep = dependency('libsoup-2.4', version : '>=2.40', required : false)
+libsoup_dep = dependency('libsoup-2.4', version : '>=2.48', required : false)
 
 if libsoup_dep.found()
   gstsouphttpsrc = library('gstsouphttpsrc',
