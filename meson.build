@@ -169,7 +169,6 @@ gstvideo_dep = dependency('gstreamer-video-1.0', version : gst_req,
 libm = cc.find_library('m', required : false)
 zlib_dep = dependency('zlib')
 bz2lib = cc.find_library('bz2', required : false)
-orc_dep = dependency('orc-0.4', version : '>= 0.4.17', required : false)
 gio_dep = dependency('gio-2.0', version : glib_req)
 glib_deps = [dependency('glib-2.0', version : glib_req),
 	     dependency('gobject-2.0', version : glib_req)]
@@ -177,11 +176,6 @@ glib_deps = [dependency('glib-2.0', version : glib_req),
 cdata.set('HAVE_ZLIB', 1)
 if bz2lib.found()
   cdata.set('HAVE_BZ2', 1)
-endif
-if orc_dep.found()
-  cdata.set('HAVE_ORC', 1)
-else
-  cdata.set('DISABLE_ORC', 1)
 endif
 
 # Check all of the things.
@@ -224,6 +218,25 @@ endif
 gst_plugins_good_args = ['-DHAVE_CONFIG_H']
 configinc = include_directories('.')
 libsinc = include_directories('gst-libs')
+
+have_orcc = false
+orcc_args = []
+if get_option('use_orc') != 'no'
+  need_orc = get_option('use_orc') == 'yes'
+  # Used by various libraries/elements that use Orc code
+  orc_dep = dependency('orc-0.4', version : '>= 0.4.17', required : need_orc)
+  orcc = find_program('orcc', required : need_orc)
+  if orc_dep.found() and orcc.found()
+    have_orcc = true
+    orcc_args = [orcc, '--include', 'glib.h']
+    cdata.set('HAVE_ORC', 1)
+  else
+    message('Orc Compiler not found, will use backup C code')
+    cdata.set('DISABLE_ORC', 1)
+  endif
+else
+  cdata.set('DISABLE_ORC', 1)
+endif
 
 subdir('gst')
 subdir('sys')

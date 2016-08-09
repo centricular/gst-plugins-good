@@ -13,18 +13,27 @@ interlace_sources = [
   'tvtime/scalerbob.c'
 ]
 
-tvtime_c = configure_file(input : 'tvtime-dist.c',
-  output : 'tvtime.c',
-  configuration : configuration_data()
-)
-
-tvtime_h = configure_file(input : 'tvtime-dist.h',
-  output : 'tvtime.h',
-  configuration : configuration_data()
-)
+orcsrc = 'tvtime'
+if have_orcc
+  orc_h = custom_target(orcsrc + '.h',
+    input : orcsrc + '.orc',
+    output : orcsrc + '.h',
+    command : orcc_args + ['--header', '-o', '@OUTPUT@', '@INPUT@'])
+  orc_c = custom_target(orcsrc + '.c',
+    input : orcsrc + '.orc',
+    output : orcsrc + '.c',
+    command : orcc_args + ['--implementation', '-o', '@OUTPUT@', '@INPUT@'])
+else
+  orc_h = configure_file(input : orcsrc + '-dist.h',
+    output : orcsrc + '.h',
+    configuration : configuration_data())
+  orc_c = configure_file(input : orcsrc + '-dist.c',
+    output : orcsrc + '.c',
+    configuration : configuration_data())
+endif
 
 gstdeinterlace = library('gstdeinterlace',
-  interlace_sources, tvtime_c,
+  interlace_sources, orc_c, orc_h,
   c_args : gst_plugins_good_args,
   include_directories : [configinc],
   dependencies : [orc_dep, gstbase_dep, gstvideo_dep],
